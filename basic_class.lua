@@ -1,9 +1,8 @@
 Resize = {
   a = 0,
   b = 0,
-}
 
-function Resize:new(params)
+  new = function(self, params)
     object = {
       a = params["a"],
       b = params["b"],
@@ -11,25 +10,23 @@ function Resize:new(params)
     setmetatable(object, self)
     self.__index = self
     return object
-end
+  end,
 
-function Resize:validate()
-  print("Resize validate " .. self.a .. " " .. self.b)
-end
+  validate = function(self)
+    print("Resize validate " .. self.a .. " " .. self.b)
+  end,
 
-function Resize:execute()
-  print("Resize execute " .. self.a .. " " .. self.b)
-end
-
-
+  execute = function(self)
+    print("Resize execute " .. self.a .. " " .. self.b)
+  end
+}
 
 Rotate = {
   a = 0,
   b = 0,
-  c = 0
-}
+  c = 0,
 
-function Rotate:new(params)
+  new = function(self, params)
     object = {
       a = params["a"],
       b = params["b"],
@@ -38,22 +35,22 @@ function Rotate:new(params)
     setmetatable(object, self)
     self.__index = self
     return object
-end
+  end,
 
-function Rotate:validate()
-  print("Rotate validate " .. self.a .. " " .. self.b .. " " .. self.c)
-end
+  validate = function(self)
+    print("Rotate validate " .. self.a .. " " .. self.b .. " " .. self.c)
+  end,
 
-function Rotate:execute()
-  print("Rotate execute " .. self.a .. " " .. self.b .. " " .. self.c)
-end
-
-FactoryTable = {
-  resize = Resize,
-  rotate = Rotate,
+  execute = function(self)
+    print("Rotate execute " .. self.a .. " " .. self.b .. " " .. self.c)
+  end
 }
 
 function create_operator(action, params)
+  FactoryTable = {
+    resize = Resize,
+    rotate = Rotate,
+  }
   return FactoryTable[action]:new(params)
 end
 
